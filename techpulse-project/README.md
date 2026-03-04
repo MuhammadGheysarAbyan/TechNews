@@ -1,4 +1,4 @@
-# 🚀 TechPulse — Website Berita Teknologi Profesional
+# 🚀 TechPulse — Website Berita Teknologi Premium
 
 > Media teknologi terdepan Indonesia. Dibangun dengan **Next.js 14**, TypeScript, TailwindCSS, Prisma, dan PostgreSQL.
 
@@ -7,15 +7,79 @@
 ## ✨ Fitur Utama
 
 | Fitur | Deskripsi |
-|-------|-----------|
-| 🏠 **Homepage** | Hero carousel, breaking news ticker, trending sidebar, grid artikel responsif |
+|----------|-----------|
+| 🏠 **Homepage** | Hero carousel, breaking news ticker, trending sidebar, animated stats counter, grid artikel responsif |
 | 📰 **Article Page** | Reading progress bar, author bio, nested comments, like, bookmark, share |
 | ⚙️ **Admin Dashboard** | Dashboard stats, chart pageviews, CRUD artikel, user management, analytics |
 | 🔍 **Search & Filter** | Live search, filter kategori + tag, staggered card animations |
-| 📧 **Newsletter** | Subscribe modal, inline CTA section |
+| 📧 **Newsletter** | Subscribe modal, gradient mesh section, glassmorphism cards |
 | 🔐 **Auth System** | JWT, bcrypt, role-based (Admin/Editor/Writer/User) |
 | 🗺️ **SEO** | Auto meta, OpenGraph, Twitter card, sitemap XML |
-| 🌙 **Premium Dark UI** | Glassmorphism, micro-animations, gradient effects |
+| 🌟 **Premium UI** | Glassmorphism, micro-animations, gradient effects, pulse glow, particle dots |
+
+---
+
+## ⚡ Cara Menjalankan (Quick Start)
+
+### ✅ Yang Dibutuhkan
+- **Node.js 18+** — [Download di sini](https://nodejs.org/)
+- **npm** (sudah termasuk saat install Node.js)
+
+### Langkah 1 — Buka Terminal
+
+Buka **Command Prompt** atau **PowerShell** atau **Terminal** di VS Code.
+
+### Langkah 2 — Masuk ke Folder Project
+
+```bash
+cd c:\xampp\htdocs\tech-pulse\techpulse-project
+```
+
+### Langkah 3 — Install Dependencies
+
+```bash
+npm install
+```
+
+> ⏱️ Proses ini memakan waktu beberapa menit saat pertama kali.
+
+### Langkah 4 — Jalankan Development Server
+
+```bash
+npm run dev
+```
+
+### Langkah 5 — Buka di Browser
+
+```
+http://localhost:3000
+```
+
+🎉 **Selesai!** Website langsung bisa diakses dengan data demo built-in.
+
+---
+
+## ❓ Troubleshooting
+
+| Masalah | Solusi |
+|---------|--------|
+| `npm install` error | Pastikan Node.js 18+ terinstall. Cek: `node --version` |
+| Port 3000 sudah dipakai | Jalankan: `npx next dev -p 3001` |
+| Module not found | Hapus `node_modules` lalu `npm install` ulang |
+| Gambar tidak muncul | Pastikan folder `public/images/articles/` berisi file PNG |
+
+---
+
+## 🔑 Login Admin (Demo)
+
+1. Klik tombol **"Admin"** di navbar
+2. Gunakan salah satu akun demo:
+
+| Role | Email | Password |
+|------|-------|----------|
+| **Super Admin** | admin@techpulse.id | admin123 |
+| **Editor** | editor@techpulse.id | editor123 |
+| **Writer** | writer@techpulse.id | writer123 |
 
 ---
 
@@ -29,129 +93,25 @@ techpulse-project/
 ├── src/
 │   ├── app/
 │   │   ├── api/              # REST API routes
-│   │   │   ├── articles/     # CRUD artikel
-│   │   │   ├── auth/login/   # Login endpoint
-│   │   │   ├── comments/     # Komentar & reply
-│   │   │   └── newsletter/   # Subscribe/konfirmasi
 │   │   ├── globals.css       # Design system (glassmorphism, animations)
-│   │   ├── layout.tsx        # Root layout + Google Fonts + metadata
-│   │   ├── page.tsx          # Homepage (composed from components)
+│   │   ├── layout.tsx        # Root layout + Google Fonts
+│   │   ├── page.tsx          # Homepage
 │   │   └── sitemap.ts        # Auto-generated sitemap
 │   ├── components/
-│   │   ├── admin/
-│   │   │   └── AdminDashboard.tsx
-│   │   ├── article/
-│   │   │   ├── ArticleCard.tsx     # 3 variants: default, hero, compact
-│   │   │   ├── ArticleDetail.tsx   # Full article page
-│   │   │   └── HeroSection.tsx     # Carousel + trending sidebar
-│   │   ├── layout/
-│   │   │   ├── Navbar.tsx          # Glassmorphism navbar
-│   │   │   ├── Footer.tsx          # Social icons + links
-│   │   │   └── BreakingBar.tsx     # Animated ticker
-│   │   ├── sections/
-│   │   │   ├── NewsletterSection.tsx
-│   │   │   └── PopularTags.tsx
-│   │   ├── ui/
-│   │   │   ├── Avatar.tsx
-│   │   │   ├── BackToTop.tsx
-│   │   │   ├── Badge.tsx
-│   │   │   ├── ImagePlaceholder.tsx
-│   │   │   ├── LoadingScreen.tsx
-│   │   │   ├── Modal.tsx
-│   │   │   └── ReadingProgress.tsx
-│   │   └── TechPulse.jsx    # Legacy monolithic component
+│   │   ├── admin/            # Admin Dashboard
+│   │   ├── article/          # ArticleCard, ArticleDetail, HeroSection
+│   │   ├── layout/           # Navbar, Footer, BreakingBar
+│   │   ├── sections/         # Newsletter, PopularTags, StatsCounter
+│   │   └── ui/               # Avatar, Badge, Modal, LoadingScreen, Toast
 │   └── lib/
-│       ├── auth.ts           # JWT + bcrypt helpers
+│       ├── auth.ts           # Authentication helpers
 │       ├── data.ts           # Article data + types
 │       ├── db.ts             # Prisma client singleton
 │       └── utils.ts          # Formatting utilities
-├── .env.example
-├── next.config.js
+├── public/images/articles/   # Article images
 ├── tailwind.config.js
-├── tsconfig.json
 └── package.json
 ```
-
----
-
-## ⚡ Cara Menjalankan (Quick Start)
-
-### Prerequisites
-- **Node.js 18+** — [Download](https://nodejs.org/)
-- **npm** (sudah termasuk di Node.js)
-
-### 1. Buka Terminal / Command Prompt
-
-```bash
-cd c:\xampp\htdocs\tech-pulse\techpulse-project
-```
-
-### 2. Install Dependencies
-
-```bash
-npm install
-```
-
-### 3. Jalankan Development Server
-
-```bash
-npm run dev
-```
-
-### 4. Buka di Browser
-
-```
-http://localhost:3000
-```
-
-🎉 **Selesai!** Website langsung bisa diakses dengan data demo built-in.
-
----
-
-## 🔑 Login Admin (Demo)
-
-1. Klik tombol **"Admin"** di navbar
-2. Isi email dan password **apapun** (demo mode)
-3. Klik **"Masuk"**
-
----
-
-## 🗄️ Setup Database (Opsional — untuk Production)
-
-Jika ingin menggunakan database PostgreSQL yang sesungguhnya:
-
-### 1. Install PostgreSQL
-
-Download di: https://www.postgresql.org/download/
-
-### 2. Setup Environment Variables
-
-```bash
-copy .env.example .env
-```
-
-Edit `.env`:
-```env
-DATABASE_URL="postgresql://postgres:password@localhost:5432/techpulse"
-JWT_SECRET="your-jwt-secret-key-min-32-chars"
-NEXTAUTH_SECRET="your-nextauth-secret"
-NEXTAUTH_URL="http://localhost:3000"
-```
-
-### 3. Push Schema & Seed Data
-
-```bash
-npx prisma db push
-npx ts-node prisma/seed.ts
-```
-
-### 4. Credentials Setelah Seed
-
-| Role | Email | Password |
-|------|-------|----------|
-| **Admin** | admin@techpulse.id | admin123 |
-| **Editor** | rina@techpulse.id | editor123 |
-| **Writer** | dimas@techpulse.id | writer123 |
 
 ---
 
@@ -181,12 +141,12 @@ POST   /api/newsletter            # Subscribe email
 | Element | Value |
 |---------|-------|
 | **Primary Font** | Inter (sans-serif) |
+| **Display Font** | Merriweather (serif) |
 | **Mono Font** | JetBrains Mono |
-| **Background** | gray-950 (#030712) |
-| **Primary Color** | emerald-500 (#10b981) |
-| **Border** | white/10 rgba |
-| **Effects** | Glassmorphism, backdrop-blur |
-| **Animations** | fadeIn, scaleIn, shimmer, pulseGlow |
+| **Background** | #fafbfc |
+| **Accent Color** | #0066ff |
+| **Effects** | Glassmorphism, backdrop-blur, gradient mesh |
+| **Animations** | fadeIn, scaleIn, pulseGlow, float, gradientShift, countUp |
 
 ---
 
@@ -195,6 +155,19 @@ POST   /api/newsletter            # Subscribe email
 ```bash
 npm run build
 npm start
+```
+
+---
+
+## 🗄️ Setup Database (Opsional)
+
+Untuk production dengan PostgreSQL:
+
+```bash
+copy .env.example .env
+# Edit .env dengan DATABASE_URL PostgreSQL
+npx prisma db push
+npx ts-node prisma/seed.ts
 ```
 
 ---

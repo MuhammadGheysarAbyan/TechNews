@@ -129,3 +129,38 @@ export function getSession(): (Omit<AdminUser, 'password'> & { loginAt: string }
 export function clearSession() {
   if (typeof window !== 'undefined') localStorage.removeItem(SESSION_KEY);
 }
+
+// Role hierarchy for API authorization
+const ROLE_HIERARCHY: Record<string, number> = {
+  'USER': 0,
+  'WRITER': 1,
+  'EDITOR': 2,
+  'ADMIN': 3,
+  'super_admin': 3,
+  'editor': 2,
+  'writer': 1,
+};
+
+export function requireRole(userRole: string, minimumRole: string): boolean {
+  return (ROLE_HIERARCHY[userRole] || 0) >= (ROLE_HIERARCHY[minimumRole] || 0);
+}
+
+// Stub: In production, decode JWT token to get user. For demo, returns null.
+export async function getUserFromToken(token: string): Promise<{ id: string; email: string; name: string; role: string } | null> {
+  // In a real app, verify and decode the JWT here
+  if (!token) return null;
+  const account = ADMIN_ACCOUNTS.find((a) => a.email === token);
+  if (account) return { id: '1', email: account.email, name: account.name, role: account.roleKey };
+  return null;
+}
+
+// Authentication stubs for API routes
+export async function comparePassword(password: string, hash: string): Promise<boolean> {
+  // Fast comparison for demo purposes
+  return password === hash;
+}
+
+export async function signToken(payload: any): Promise<string> {
+  // Return fake token for demo
+  return 'demo_token_' + (payload.id || '1');
+}

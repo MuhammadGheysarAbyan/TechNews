@@ -15,18 +15,47 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="bg-[#0f172a]">
-            <div className="max-w-[1280px] mx-auto px-5 sm:px-8">
+        <footer className="relative bg-[#0a0f1e] overflow-hidden">
+            {/* Gradient top border */}
+            <div
+                className="absolute top-0 left-0 right-0 h-[3px]"
+                style={{
+                    background: 'linear-gradient(90deg, transparent, #0066ff, #00ccff, #6366f1, #0066ff, transparent)',
+                    backgroundSize: '200% 100%',
+                    animation: 'gradientShift 4s ease infinite',
+                }}
+            />
+
+            {/* Subtle dot pattern */}
+            <div
+                className="absolute inset-0 opacity-[0.03]"
+                style={{
+                    backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)',
+                    backgroundSize: '24px 24px',
+                }}
+            />
+
+            {/* Gradient orbs */}
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent-500/5 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-indigo-500/5 rounded-full blur-3xl" />
+
+            <div className="relative z-10 max-w-[1280px] mx-auto px-5 sm:px-8">
                 {/* Newsletter */}
-                <div className="py-10 border-b border-white/10">
+                <div className="py-10 border-b border-white/8">
                     <div className="flex flex-col md:flex-row items-center gap-5">
                         <div className="flex-1 text-center md:text-left">
                             <h3 className="text-white font-bold text-lg">Berlangganan Newsletter</h3>
                             <p className="text-gray-400 text-sm mt-1">Ringkasan berita teknologi terbaik, dikirim setiap pagi.</p>
                         </div>
                         <div className="flex gap-2 w-full md:w-auto">
-                            <input placeholder="email@anda.com" type="email" className="flex-1 md:w-64 bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20" />
-                            <button className="bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors flex-shrink-0">Subscribe</button>
+                            <input
+                                placeholder="email@anda.com"
+                                type="email"
+                                className="flex-1 md:w-64 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300"
+                            />
+                            <button className="bg-accent-500 hover:bg-accent-400 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 flex-shrink-0 hover:shadow-glow-blue">
+                                Subscribe
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -35,15 +64,24 @@ export default function Footer() {
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-8 py-10">
                     <div className="col-span-2">
                         <div className="flex items-center gap-2.5 mb-4">
-                            <div className="w-8 h-8 rounded-[10px] bg-blue-600 flex items-center justify-center text-white font-extrabold text-sm">T</div>
-                            <span className="text-white font-extrabold text-lg">Tech<span className="text-blue-400">Pulse</span></span>
+                            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-accent-500 to-accent-700 flex items-center justify-center text-white font-extrabold text-sm shadow-glow-blue">
+                                T
+                            </div>
+                            <span className="text-white font-extrabold text-lg">
+                                Tech<span className="text-accent-400">Pulse</span>
+                            </span>
                         </div>
                         <p className="text-gray-400 text-sm leading-relaxed mb-5 max-w-xs">
                             Media teknologi terdepan Indonesia. Berita terkini, analisis mendalam, dan wawasan industri digital.
                         </p>
                         <div className="flex items-center gap-2">
                             {socials.map((s) => (
-                                <a key={s.name} href="#" className="w-9 h-9 rounded-lg bg-white/5 hover:bg-blue-600 border border-white/10 hover:border-blue-500 flex items-center justify-center text-gray-400 hover:text-white transition-all" aria-label={s.name}>
+                                <a
+                                    key={s.name}
+                                    href="#"
+                                    className="w-9 h-9 rounded-xl bg-white/5 hover:bg-accent-500 border border-white/10 hover:border-accent-400 flex items-center justify-center text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-glow-blue"
+                                    aria-label={s.name}
+                                >
                                     {s.icon}
                                 </a>
                             ))}
@@ -51,10 +89,20 @@ export default function Footer() {
                     </div>
                     {columns.map((col) => (
                         <div key={col.title}>
-                            <h4 className="text-white font-semibold text-[13px] mb-4 uppercase tracking-wider">{col.title}</h4>
+                            <h4 className="text-white font-semibold text-[13px] mb-4 uppercase tracking-wider">
+                                {col.title}
+                            </h4>
                             <ul className="space-y-2.5">
                                 {col.links.map((link) => (
-                                    <li key={link}><a href="#" className="text-gray-400 text-sm hover:text-white transition-colors">{link}</a></li>
+                                    <li key={link}>
+                                        <a
+                                            href="#"
+                                            className="text-gray-400 text-sm hover:text-accent-400 transition-colors duration-200 flex items-center gap-1.5 group"
+                                        >
+                                            <span className="w-0 group-hover:w-2 h-px bg-accent-400 transition-all duration-200" />
+                                            {link}
+                                        </a>
+                                    </li>
                                 ))}
                             </ul>
                         </div>
@@ -62,11 +110,14 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom */}
-                <div className="border-t border-white/10 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
+                <div className="border-t border-white/8 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
                     <p className="text-gray-500 text-[13px]">© 2025 TechPulse. All rights reserved.</p>
                     <div className="flex items-center gap-4 text-[13px]">
                         <span className="flex items-center gap-1.5 text-gray-500">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                            </span>
                             All systems operational
                         </span>
                     </div>

@@ -5,11 +5,16 @@ import { prisma } from '@/lib/db'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://techpulse.id'
 
-  const articles = await prisma.article.findMany({
-    where: { status: 'PUBLISHED' },
-    select: { slug: true, updatedAt: true },
-    orderBy: { publishedAt: 'desc' },
-  })
+  let articles: any[] = []
+  try {
+    articles = await prisma.article.findMany({
+      where: { status: 'PUBLISHED' },
+      select: { slug: true, updatedAt: true },
+      orderBy: { publishedAt: 'desc' },
+    })
+  } catch (error) {
+    console.warn('Prisma not available during sitemap build, skipping article URLs')
+  }
 
   const articleUrls = articles.map((article) => ({
     url: `${baseUrl}/${article.slug}`,

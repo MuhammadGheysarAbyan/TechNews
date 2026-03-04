@@ -15,6 +15,7 @@ import ArticleDetail from '@/components/article/ArticleDetail';
 import HeroSection from '@/components/article/HeroSection';
 import NewsletterSection from '@/components/sections/NewsletterSection';
 import PopularTags from '@/components/sections/PopularTags';
+import StatsCounter from '@/components/sections/StatsCounter';
 import AdminDashboard from '@/components/admin/AdminDashboard';
 import { ToastProvider, useToast } from '@/components/ui/Toast';
 
@@ -216,8 +217,8 @@ function HomeContent() {
               onClick={handleLogin}
               disabled={loginLocked || loginLoading}
               className={`w-full mt-5 font-semibold py-2.5 rounded-lg text-[14px] transition-all shadow-sm flex items-center justify-center gap-2 ${loginLocked || loginLoading
-                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                  : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-md'
+                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-md'
                 }`}
             >
               {loginLoading ? (
@@ -288,6 +289,9 @@ function HomeContent() {
         <div className="max-w-[1280px] mx-auto px-5 sm:px-8 py-8">
           {/* Hero */}
           {!search && activeCategory === 'All' && <HeroSection heroArticles={heroArticles} trendingArticles={trendingArticles} onSelectArticle={setSelectedArticle} />}
+
+          {/* Animated Stats */}
+          {!search && activeCategory === 'All' && <StatsCounter />}
 
           {/* Editor's Picks */}
           {!search && activeCategory === 'All' && (

@@ -56,7 +56,7 @@ export async function PUT(req: NextRequest, { params }: { params: { slug: string
     if (!article) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
     // Only admin/editor OR the author can edit
-    if (!requireRole(user.role, 'EDITOR') && article.authorId !== user.id) {
+    if (!requireRole(user.role, 'EDITOR') && String(article.authorId) !== String(user.id)) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
     }
 
